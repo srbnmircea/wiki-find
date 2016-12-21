@@ -22,40 +22,9 @@ Wiki Find is a simple search engine that finds the minimum distance between two 
 
 2. Create the 'wiki' database following the instructions below.
 
-3. Run as many crawlers as you like to populate the database `python crawler.py`.
+3. Create the database using the command 'python create_db.py'
 
-
-## Creating the database
-
-While logged in as user 'postgres' create the 'wiki' database and connect to it.
-
-```
-CREATE DATABASE wiki;
-
-\connect wiki;
-```
-
-Create the two 'article' and 'link' tables using the following code. In order to make the crawler run the 'article' database must be populated with at least one article of your choosing.
-
-
-```
-CREATE TABLE article (
-    name TEXT PRIMARY KEY,
-    last_crawled TIMESTAMP,
-    assigned_crawler_id UUID,
-    assigned_crawler_time TIMESTAMP
-);
-
-CREATE UNIQUE INDEX name_id ON article (lower(name));
-
-CREATE TABLE link (
-    from_article TEXT REFERENCES article (name),
-    to_article TEXT,
-    CONSTRAINT u_constraint UNIQUE (from_article, to_article)
-);
-
-INSERT INTO article (name) VALUES ('Foobar');
-```
+4. Run as many crawlers as you like to populate the database `python crawler.py`.
 
 
 ## Usage
